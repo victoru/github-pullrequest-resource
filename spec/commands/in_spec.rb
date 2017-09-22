@@ -93,6 +93,11 @@ describe Commands::In do
         expect(value).to eq 'jtarchie'
       end
 
+      it 'sets config variable to pr title' do
+        value = git('config pullrequest.title', dest_dir)
+        expect(value).to eq 'first-pull-request'
+      end
+
       it 'creates a file that icludes the id in the .git folder' do
         value = File.read(File.join(dest_dir, '.git', 'id')).strip
         expect(value).to eq '1'
@@ -116,6 +121,11 @@ describe Commands::In do
       it 'creates a file that includes the hash of the branch  in the .git folder' do
         value = File.read(File.join(dest_dir, '.git', 'head_sha')).strip
         expect(value).to eq 'hash'
+      end
+
+      it 'creates a file that includes the title of the pr  in the .git folder' do
+        value = File.read(File.join(dest_dir, '.git', 'title')).strip
+        expect(value).to eq 'first-pull-request'
       end
     end
 
